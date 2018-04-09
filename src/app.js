@@ -1,12 +1,9 @@
-const Koa = require('koa');
-const app = new Koa();
+import express from 'express';
 
-const main = function(ctx) {
-    console.log(ctx.request.url);
-    const n = Number(ctx.cookies.get('view') || 0) + 1;
-    ctx.cookies.set('view', n);
-    ctx.response.body = n + ' views';
-}
+const app = express();
 
-app.use(main);
-app.listen(3000);
+app.get('/', (req, res, next) => {
+    res.send('server index');
+})
+app.set('port', process.env.PORT || 3000);
+app.listen('3000');
